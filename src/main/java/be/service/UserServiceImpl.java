@@ -1,47 +1,47 @@
 package be.service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import javax.annotation.PostConstruct;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import be.domain.User;
-import be.exception.WrongVersionException;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
-    Map<Long, User> users = new HashMap<Long, User>();
+    @PersistenceContext
+    private EntityManager em;
 
     public UserServiceImpl() throws InterruptedException {
-	save(new User("Raphael", "Dupond", "Raph"));
-	save(new User("Tommy", "Bertrand", "Tom"));
-	save(new User("Frederic", "Legrand", "Fred"));
+    }
+
+    @PostConstruct
+    public void afterPropertiesSet() {
     }
 
     public User findById(Long id) {
-	return this.users.get(id);
+	return this.em.find(User.class, id);
     }
 
     public List<User> findAll() {
-	return new ArrayList<User>(this.users.values());
+	return this.em.createQuery("from User").getResultList();
     }
 
+    @Transactional
     public void save(User user) {
-	if (user.getId() == null) {
-	    Long id = System.currentTimeMillis();
-	    user.setId(id);
-	} else {
-	    checkVersion(user);
-	}
-	this.users.put(user.getId(), user);
+	user.setNickname(StringUtils.substring(user.getFirstname(), 0, 4));
+	this.em.persist(user);
+	this.em.flush();
     }
 
-    private void checkVersion(User user) {
-	User original = findById(user.getId());
-	if (user.getVersion() != original.getVersion()) {
-	    throw new WrongVersionException();
-	}
+    public void delete(User user) {
+	this.em.remove(user);
     }
+
 }

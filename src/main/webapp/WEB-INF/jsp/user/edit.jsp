@@ -14,11 +14,13 @@
 
 <body>
 
-	<spring:url var="saveUrl" value="/user/save.html?user=${user.id}"></spring:url>
+	<spring:url var="saveUrl" value="/user/save.html?user=${user.id}&fakeUserParam=${user.id}"></spring:url>
 	<form:form modelAttribute="user"  action="${saveUrl}">	
-		<form:label path="firstname" for="firstname"/><form:input path="firstname"/>
-		<form:label path="lastname" for="lastname"/><form:input path="lastname"/>
-		<form:label path="version" for="version"/><form:input path="version"/>
+		firstname <form:input path="firstname"/><br/>
+		lastname <form:label path="lastname" for="lastname"/><form:input path="lastname"/><br/>
+		age <form:label path="age" for="age"/><form:input path="age"/><br/>
+		<form:hidden path="version"/>
+		Version : <c:out value="${user.version}"/>
 		
 		<input type="submit" value="save">
 	</form:form>

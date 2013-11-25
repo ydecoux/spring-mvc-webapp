@@ -1,5 +1,6 @@
 package be.converter;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,17 @@ public class UserConverter implements Converter<String, User> {
     private UserService userService;
 
     public User convert(String source) {
-	LOGGER.info("Trying to convert Long value {} to User", source);
-	User user = this.userService.findById(Long.parseLong(source));
-	if (user == null) {
-	    throw new EntityNotFoundException();
+
+	if (!StringUtils.isBlank(source)) {
+	    User user = this.userService.findById(Long.parseLong(source));
+
+	    if (user == null) {
+		throw new EntityNotFoundException();
+	    }
+	    LOGGER.info("Converted user " + user);
+	    return user;
 	}
-	return user;
+	LOGGER.info("Unable to convert {} to {}", source, User.class);
+	return null;
     }
 }

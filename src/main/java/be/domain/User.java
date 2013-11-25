@@ -1,13 +1,31 @@
 package be.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class User implements Versionnable {
+@Entity
+@Table(schema = "public")
+public class User implements Versionable {
+    @Id
+    @GeneratedValue
     private Long id;
+    @Column
     private String firstname;
+    @Column
     private String lastname;
+    @Column
     private String nickname;
-    private long version;
+    @Column
+    private Integer age;
+    @Version
+    @Column
+    private Long version;
 
     /**
      * The default constructor for User.
@@ -102,7 +120,36 @@ public class User implements Versionnable {
 	this.lastname = lastname;
     }
 
-    public long getVersion() {
+    public Long getVersion() {
 	return this.version;
+    }
+
+    /**
+     * The setter method of the version field.
+     * 
+     * @param version
+     *            the version value to set
+     */
+    public void setVersion(Long version) {
+	this.version = version;
+    }
+
+    /**
+     * The setter method of the age field.
+     * 
+     * @param age
+     *            the age value to set
+     */
+    public void setAge(Integer age) {
+	this.age = age;
+    }
+
+    /**
+     * The getter method of the age field.
+     * 
+     * @return the age value
+     */
+    public Integer getAge() {
+	return this.age;
     }
 }

@@ -19,19 +19,32 @@
 			<th>Firstname</th>
 			<th>Lastname</th>
 			<th>Nickname</th>
+			<th>Version</th>
 			<th>action</th>
 		</tr>
 		<c:forEach items="${users}" var="user">
-			<spring:url var="editUrl"  value="/user/${user.id}/edit.html"/>
+			<spring:url var="editUrl" value="/user/edit.html" >
+				<spring:param name="user" value="${user.id}"/>
+			</spring:url>
+			
+			<spring:url var="deleteUrl" value="/user/delete.html" >
+				<spring:param name="user" value="${user.id}"/>
+			</spring:url>
 			<tr>
 				<td><c:out value="${user.id}" /></td>
 				<td><c:out value="${user.firstname}" /></td>
 				<td><c:out value="${user.lastname}" /></td>
 				<td><c:out value="${user.nickname}" /></td>
-				<td><a href="${editUrl}">edit</a> </td>
+				<td><c:out value="${user.version}" /></td>
+				<td>
+					<a href="${editUrl}">edit</a>/
+					<a href="${deleteUrl}">delete</a>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>
 
+	<spring:url var="addUrl" value="/user/add.html" />
+	<a href="${addUrl}">Add some fun!</a>
 </body>
 </html>
