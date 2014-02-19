@@ -13,6 +13,7 @@
   <tx:annotation-driven transaction-manager="transactionManager" />
   <beans profile="jpa">
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+      <!-- HibernateJpaDialect allow to use the readOnly  parameter of the Transactional annotation, avoiding unwanted flush on read operation -->
       <property name="jpaDialect">
         <bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect">
         </bean>

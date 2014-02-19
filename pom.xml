@@ -1,4 +1,4 @@
-<!-- <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>be.test</groupId>
   <artifactId>spring-mvc-webapp</artifactId>
@@ -10,7 +10,7 @@
     <finalName>spring-mvc-webapp</finalName>
   </build>
   <dependencies>
-    Spring shit
+    <!-- Spring shit -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
@@ -58,11 +58,11 @@
     <artifactId>jcl-over-slf4j</artifactId>
     <version>1.7.6</version>
 </dependency>
-    Servlet spec shit
+    <!-- Servlet spec shit -->
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
-      <version>2.5</version>
+      <version>3.0</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -71,7 +71,7 @@
       <version>2.2</version>
       <scope>provided</scope>
     </dependency>
-Logging shit
+<!-- Logging shit -->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
@@ -82,17 +82,17 @@ Logging shit
       <artifactId>logback-classic</artifactId>
       <version>1.0.13</version>
     </dependency>
-    Utillity shit
+    <!-- Utillity shit -->
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
       <version>3.1</version>
     </dependency>
-    JPA Shit
+    <!-- JPA Shit -->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-entitymanager</artifactId>
-      <version>3.6.9.FINAL</version>
+      <version>3.3.2.GA</version>
     </dependency>
     <dependency>
       <groupId>javax.persistence</groupId>
@@ -100,14 +100,14 @@ Logging shit
       <version>1.0.2</version>
     </dependency>
     <dependency>
-      <groupId>dom4j</groupId>
-      <artifactId>dom4j</artifactId>
-      <version>1.6.1</version>
+    <groupId>dom4j</groupId>
+    <artifactId>dom4j</artifactId>
+    <version>1.6.1</version>
     </dependency>
     <dependency>
-      <groupId>net.sf.oval</groupId>
-      <artifactId>oval</artifactId>
-      <version>1.30</version>
+	<groupId>net.sf.oval</groupId>
+	<artifactId>oval</artifactId>
+	<version>1.30</version>
     </dependency>
   </dependencies>
-</project> -->
+</project>

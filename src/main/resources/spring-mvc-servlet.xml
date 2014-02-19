@@ -17,7 +17,23 @@
     <property name="converters">
       <list>
         <bean class="be.converter.UserConverter" />
+        <bean class="be.converter.AddressConverter" />
       </list>
     </property>
   </bean>
+  <beans profile="jpa">
+    <mvc:interceptors>
+      <bean class="org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+      </bean>
+    </mvc:interceptors>
+  </beans>
+  <beans profile="hibernate">
+    <mvc:interceptors>
+      <bean class="org.springframework.orm.hibernate3.support.OpenSessionInViewInterceptor" >
+      
+        <property name="sessionFactory" ref="sessionFactory" />
+      </bean>
+    </mvc:interceptors>
+  </beans>
 </beans>
