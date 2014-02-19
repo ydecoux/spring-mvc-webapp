@@ -1,9 +1,15 @@
 package be.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -11,7 +17,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Entity
 @Table(schema = "public")
-public class User implements Versionable {
+public class User/* implements Versionable */{
     @Id
     @GeneratedValue
     private Long id;
@@ -23,9 +29,18 @@ public class User implements Versionable {
     private String nickname;
     @Column
     private Integer age;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Address> addresses;
     @Version
     @Column
     private Long version;
+
+    public void addaddress(Address address) {
+        if (this.addresses == null) {
+            this.addresses = new ArrayList<Address>();
+        }
+        this.addresses.add(address);
+    }
 
     /**
      * The default constructor for User.
@@ -34,14 +49,14 @@ public class User implements Versionable {
     }
 
     public User(String firstname, String lastname, String nickname) {
-	this.firstname = firstname;
-	this.lastname = lastname;
-	this.nickname = nickname;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.nickname = nickname;
     }
 
     @Override
     public String toString() {
-	return ToStringBuilder.reflectionToString(this);
+        return ToStringBuilder.reflectionToString(this);
     }
 
     /**
@@ -50,7 +65,7 @@ public class User implements Versionable {
      * @return the nickname value
      */
     public String getNickname() {
-	return this.nickname;
+        return this.nickname;
     }
 
     /**
@@ -60,7 +75,7 @@ public class User implements Versionable {
      *            the nickname value to set
      */
     public void setNickname(String nickname) {
-	this.nickname = nickname;
+        this.nickname = nickname;
     }
 
     /**
@@ -69,7 +84,7 @@ public class User implements Versionable {
      * @return the id value
      */
     public Long getId() {
-	return this.id;
+        return this.id;
     }
 
     /**
@@ -79,7 +94,7 @@ public class User implements Versionable {
      *            the id value to set
      */
     public void setId(Long id) {
-	this.id = id;
+        this.id = id;
     }
 
     /**
@@ -88,7 +103,7 @@ public class User implements Versionable {
      * @return the firstname value
      */
     public String getFirstname() {
-	return this.firstname;
+        return this.firstname;
     }
 
     /**
@@ -98,7 +113,7 @@ public class User implements Versionable {
      *            the firstname value to set
      */
     public void setFirstname(String firstname) {
-	this.firstname = firstname;
+        this.firstname = firstname;
     }
 
     /**
@@ -107,7 +122,7 @@ public class User implements Versionable {
      * @return the lastname value
      */
     public String getLastname() {
-	return this.lastname;
+        return this.lastname;
     }
 
     /**
@@ -117,11 +132,11 @@ public class User implements Versionable {
      *            the lastname value to set
      */
     public void setLastname(String lastname) {
-	this.lastname = lastname;
+        this.lastname = lastname;
     }
 
     public Long getVersion() {
-	return this.version;
+        return this.version;
     }
 
     /**
@@ -131,7 +146,7 @@ public class User implements Versionable {
      *            the version value to set
      */
     public void setVersion(Long version) {
-	this.version = version;
+        this.version = version;
     }
 
     /**
@@ -141,7 +156,7 @@ public class User implements Versionable {
      *            the age value to set
      */
     public void setAge(Integer age) {
-	this.age = age;
+        this.age = age;
     }
 
     /**
@@ -150,6 +165,15 @@ public class User implements Versionable {
      * @return the age value
      */
     public Integer getAge() {
-	return this.age;
+        return this.age;
+    }
+
+    /**
+     * The getter method of the addresses field.
+     * 
+     * @return the addresses value
+     */
+    public List<Address> getAddresses() {
+        return this.addresses;
     }
 }
